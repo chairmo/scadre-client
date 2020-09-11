@@ -1,0 +1,89 @@
+<template>
+  <div class="main">
+    <h5>Promotion Record</h5>
+    <div v-if="message" class="alert-success"/>
+    <div class="align-content-center">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Id</th>
+          <th>Promoted Level</th>
+          <th>Rank Code</th>
+          <th>Promoted Rank</th>
+          <th>Promotion Date</th>
+          <th>Previous Level</th>
+          <th>Previous Rank</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(promotion, index) in promotions" v-bind:key="index">
+          <th>{{index + 1}}</th>
+          <td>{{ promotion.newDesignation.level.name }}</td>
+          <td>{{ promotion.newDesignation.rankCode }}</td>
+          <td>{{ promotion.newDesignation.name }}</td>
+          <td>{{ promotion.promotionDate }}</td>
+          <td>{{ promotion.previousDesignation.level.name }}</td>
+          <td>{{ promotion.previousDesignation.name }}</td>
+          <td>
+            <div class="btn btn-group">
+              <router-link :to="{name:'editPromotion', params:{id:promotion.id}}" class="btn btn-success">Update
+              </router-link>
+              <button class="btn btn-warning" v-on:click="deletePromotion(promotion.id)">Delete</button>
+            </div>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+      <div >
+        <router-link :to="{name:'addPromotion'}" class="btn btn-success ">Add</router-link>
+        <router-link :to="{name:'accountInfo'}"
+                     class="i btn btn-success" v-if="promotions.length">Next
+        </router-link>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import PromotionService from "@/services/PromotionService";
+
+export default {
+  name: "promotionInfo",
+  data() {
+    return {
+      promotions: [],
+      message: ""
+    };
+  },
+  methods: {
+    refreshPromotion() {
+      PromotionService.retrievePromotionByIppis(this.$store.state.ippis)
+          .then(res => {
+            this.promotions = res.data;
+          });
+    },
+    deletePromotion(id) {
+      PromotionService.deletePromotionById(id).then(() => {
+        this.promotions = this.promotions.filter(item => item.id !== id);
+      });
+    }
+  },
+  created() {
+    this.refreshPromotion();
+  }
+}
+</script>
+
+<style scoped>
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding-left: 55px;
+  padding-right: 30px;
+}
+
+.i{
+  margin-left: 150px;
+}
+</style>
