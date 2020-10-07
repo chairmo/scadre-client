@@ -17,7 +17,7 @@
         </thead>
         <tbody>
         <tr v-for="(education, index) in educations" v-bind:key="index">
-          <td>{{index +1}}</td>
+          <td>{{ index + 1 }}</td>
           <td>{{ education.qualification.name }}</td>
           <td>{{ education.course.name }}</td>
           <td>{{ education.school.toUpperCase() }}</td>
@@ -38,7 +38,8 @@
       <div>
         <router-link :to="{name:'addEducation'}" class="btn btn-success ">Add</router-link>
         <router-link :to="{name:'certificationInfo'}"
-                       class="i btn btn-success" v-if="educations.length">Next</router-link>
+                     class="i btn btn-success" v-if="educations.length">Next
+        </router-link>
       </div>
     </div>
   </div>
@@ -57,17 +58,32 @@ export default {
   methods: {
     refreshEducation() {
       EducationService.getAllByIppis(this.$store.state.ippis).then(res => {
-            this.educations = res.data;
-          });
+        this.educations = res.data;
+      });
     },
     deleteEducation(id) {
-      EducationService.deleteEducationById(id).then(() => {
-       this.educations = this.educations.filter(result => result.id !== id);
-      });
+      this.$dialog.confirm("If you delete this record, it'll be gone forever.", {
+        loader: true
+      })
+          .then((dialog) => {
+            EducationService.deleteEducationById(id).then(() => {
+              this.educations = this.educations.filter(result => result.id !== id);
+            });
+
+            setTimeout(() => {
+              console.log('Delete action completed ');
+              dialog.close();
+            }, 2500);
+          })
+          .catch(() => {
+            // Triggered when cancel button is clicked
+
+            console.log('Delete aborted');
+          });
     }
   },
-    created() {
-      this.refreshEducation();
+  created() {
+    this.refreshEducation();
   }
 }
 </script>
@@ -78,7 +94,8 @@ export default {
   padding-left: 55px;
   padding-right: 30px;
 }
-.i{
+
+.i {
   margin-left: 150px;
 }
 </style>

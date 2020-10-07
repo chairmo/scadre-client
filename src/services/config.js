@@ -6,6 +6,7 @@ export default {
         redirectUri: 'http://localhost:8080/callback',
         baseURL: 'https://dev-374370.okta.com',
         scopes: ['openid', 'profile', 'email'],
+        getIdToken: true,
         pkce: true
     }
 }

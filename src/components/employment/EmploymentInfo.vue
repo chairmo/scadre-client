@@ -75,12 +75,21 @@ export default {
       });
     },
     deleteEmployment(id) {
-      if (confirm("Are you sure you want to delete employment record ?")) {
+      this.$dialog.confirm("If you delete this record, it'll be gone forever.", {
+        loader: true
+      }).then((dialog) => {
         EmploymentService.deleteEmployment(id).then(() => {
           this.employment = {}
         }).catch(err => {console.log(err)});
+        setTimeout(() => {
+          console.log('Delete action completed ');
+          dialog.close();
+        }, 2000);
+      }).catch(() => {
+            // Triggered when cancel button is clicked
+            console.log('Delete aborted');
+          });
       }
-    },
   },
   created() {
     this.refreshEmployment();

@@ -56,11 +56,23 @@ export default {
       return `${say} ${this.kin.lga.name} ${this.kin.lga.state.name}`
     },
     deleteStaff (id) {
-      if (confirm("Are you sure you want to delete next of kin ?")){
+      this.$dialog.confirm("If you delete this record, it'll be gone forever.", {
+        loader: true
+      })
+          .then((dialog) => {
         NextOfKinService.deleteKinById(id).then(() => {
           this.kin = {}
         }).catch(err => {console.log(err)});
-      }
+            setTimeout(() => {
+              console.log('Delete action completed ');
+              dialog.close();
+            }, 2500);
+          })
+          .catch(() => {
+            // Triggered when cancel button is clicked
+
+            console.log('Delete aborted');
+          });
     }
   },
   created() {

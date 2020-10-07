@@ -138,6 +138,18 @@
                 {{ validationContext.errors[0] }}
               </validation-provider>
             </div>
+
+<!--            <div class="col-xl-4">-->
+<!--              <validation-provider :rules="{required: true}" v-slot="{validate, errors}">-->
+<!--                <div>-->
+<!--                <label>Profile Image</label>-->
+<!--                <label class="btn btn-default">-->
+<!--                  <input type="file" ref="file" accept=".jpeg, .jpg" @change="selectFile($event) || validate($event)"/>-->
+<!--                </label>-->
+<!--                  <p id="error">{{ errors[0] }}</p>-->
+<!--                </div>-->
+<!--              </validation-provider>-->
+<!--            </div>-->
           </div>
 
           <div>
@@ -201,6 +213,9 @@ export default {
   methods: {
     getValidateState({dirty, validated, valid = null}) {
       return dirty || validated ? valid : null;
+    },
+    selectFile(){
+      this.staff.photo = this.$refs.file.files;
     },
     addStaff() {
       let data = {

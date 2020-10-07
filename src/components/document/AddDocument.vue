@@ -1,12 +1,11 @@
 <template>
   <div class="main">
-    <h6 class="align-content-center">Note: Name your required documents accordingly</h6>
+    <h5 class="align-content-center">Note: Name your required documents accordingly</h5>
     <div>
-      <ul>
-        <li>Passport</li>
-        <li>First Appointment Letter</li>
-        <li>First Degree</li>
-      </ul>
+      <h6>*Passport</h6>
+      <h6>First Appointment Letter</h6>
+      <h6>First Degree</h6>
+      <h6>Promotion Letter</h6>
     </div>
 
 
@@ -18,7 +17,8 @@
           :aria-valuenow="progress"
           aria-valuemin="0"
           aria-valuemax="100"
-          :style="{ width: progress + '%' }">{{ progress }}%</div>
+          :style="{ width: progress + '%' }">{{ progress }}%
+      </div>
     </div>
 
     <label class="btn btn-default">
@@ -32,17 +32,25 @@
     <div class="alert alert-light" role="alert">{{ message }}</div>
 
     <div v-if="fileInfos.length" class="card">
-      <div class="card-header">Uploaded Files</div>
-      <ul class="list-group list-group-flush">
-        <li
-            class="list-group-item"
-            v-for="(file, index) in fileInfos"
-            :key="index">
-          <a :href="file.url">{{ file.filename }} <i class="fa fa-minus-circle a" aria-hidden="true"
-                                                     v-on:click="deleteDocument(file.id)"></i></a>
-        </li>
-      </ul>
+      <table>
+        <thead>
+
+        <tr v-for="(file, index) in fileInfos" v-bind:key="index">
+          <td>{{ file.filename }}</td>
+          <td>
+            <i class="fa fa-minus-circle a" aria-hidden="true" v-on:click="deleteDocument(file.id)"></i>
+          </td>
+        </tr>
+        </thead>
+      </table>
     </div>
+      <div v-if="fileInfos.length" class="space">
+        <input type="checkbox" id="checkbox" v-model="submit">
+        <label for="checkbox"> <h5>Submit and Print</h5> </label>
+        <span v-if="submit"><router-link :to="{name:'summaryReport'}" class="btn btn-success">Submit
+        </router-link></span>
+      </div>
+
   </div>
 </template>
 
@@ -57,7 +65,7 @@ export default {
       currentFile: undefined,
       progress: 0,
       message: "",
-
+      submit: false,
       fileInfos: []
     }
   },
@@ -115,5 +123,15 @@ export default {
 i {
   float: right;
   cursor: pointer;
+}
+
+h6 {
+  font-size: medium;
+  font-family: sans-serif, Arial;
+  margin-right: 10px;
+}
+.space{
+  margin: 80px;
+  align-content: center;
 }
 </style>

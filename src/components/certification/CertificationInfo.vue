@@ -60,9 +60,23 @@ export default {
       });
     },
     deleteCertificate(id) {
+      this.$dialog.confirm("If you delete this record, it'll be gone forever.", {
+        loader: true
+      })
+          .then((dialog) => {
       CertificationService.deleteCertificationById(id).then(() => {
         this.certifications = this.certifications.filter(cert => cert.id !== id);
       });
+            setTimeout(() => {
+              console.log('Delete action completed ');
+              dialog.close();
+            }, 2500);
+          })
+          .catch(() => {
+            // Triggered when cancel button is clicked
+
+            console.log('Delete aborted');
+          });
     }
   },
   created() {

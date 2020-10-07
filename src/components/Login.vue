@@ -34,8 +34,7 @@ name: "login",
         scopes: sampleConfig.oidc.scopes
       },
       features: {
-        registration: true,
-        router: true
+        registration: true
       }
     })
 

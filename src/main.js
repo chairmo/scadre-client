@@ -9,6 +9,9 @@ import router from './router';
 import store from "@/store";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import VuejsDialog from 'vuejs-dialog';
+import 'vuejs-dialog/dist/vuejs-dialog.min.css'
+
 import {
   faHome,
   faUser,
@@ -42,8 +45,7 @@ Vue.component('ValidationProvider', ValidationProvider);
 
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
-
-Vue.component('vue-multiselect', window.VueMultiselect.default);
+Vue.use(VuejsDialog);
 
 Vue.config.productionTip = false
 
@@ -52,8 +54,5 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  async mounted(){
-    await this.$store.dispatch('addData')
-  },
   render: h => h(App),
 }).$mount('#app')

@@ -10,14 +10,14 @@
           <th>Organization</th>
           <th>Registered As</th>
           <th>Registration Number</th>
-          <th>Type </th>
+          <th>Type</th>
           <th>Date of Induction</th>
 
         </tr>
         </thead>
         <tbody>
         <tr v-for="(membership, index) in memberships" v-bind:key="index">
-          <td>{{index +1}}</td>
+          <td>{{ index + 1 }}</td>
           <td>{{ membership.institution.toUpperCase() }}</td>
           <td>{{ membership.name.toUpperCase() }}</td>
           <td>{{ membership.regNum.toUpperCase() }}</td>
@@ -34,10 +34,11 @@
         </tr>
         </tbody>
       </table>
-      <div >
+      <div>
         <router-link :to="{name:'addMembership'}" class="btn btn-success ">Add Membership</router-link>
         <router-link :to="{name:'nextOfKinInfo'}"
-                     class="i btn btn-success" v-if="memberships.length">Next</router-link>
+                     class="i btn btn-success" v-if="memberships.length">Next
+        </router-link>
       </div>
     </div>
   </div>
@@ -61,9 +62,23 @@ export default {
       });
     },
     deleteMembership(id) {
-      MembershipService.deleteMembershipById(id).then(() => {
-       this.memberships = this.memberships.filter(member => member.id !== id);
-      });
+      this.$dialog.confirm("If you delete this record, it'll be gone forever.", {
+        loader: true
+      })
+          .then((dialog) => {
+            MembershipService.deleteMembershipById(id).then(() => {
+              this.memberships = this.memberships.filter(member => member.id !== id);
+            });
+            setTimeout(() => {
+              console.log('Delete action completed ');
+              dialog.close();
+            }, 2500);
+          })
+          .catch(() => {
+            // Triggered when cancel button is clicked
+
+            console.log('Delete aborted');
+          });
     }
   },
   created() {
@@ -79,7 +94,7 @@ export default {
   padding-right: 30px;
 }
 
-.i{
+.i {
   margin-left: 150px;
 }
 </style>

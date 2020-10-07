@@ -3,60 +3,59 @@
     <h5>Add a skill</h5>
     <div class="align-content-center">
 
-      <!--      <label>Technical Skill (Optional)</label>-->
       <form @submit.prevent="addSkill">
-        <div class="row form-group">
-          <div class="col-xl-5">
-            <vue-multiselect v-model="name.skills" :options="skillList" class="form-control"
-                             :multiple="false" placeholder="Type to search" track-by="name"
-                             label="name"><span slot="noResult">Oops! No skill found.
-          Consider searching a different skill-set.</span></vue-multiselect>
+        <div class="row form-group ">
+          <div class="col-xl-4">
+
+            <select v-model="skills" id="banId" class="form-control">
+              <option v-for="skill in skillList" v-bind:value="skill.id"
+                      aria-describedby="input-1-live-feedback"
+                      v-bind:key="skill.name">{{ skill.name }}
+              </option>
+            </select>
           </div>
         </div>
         <button class="btn btn-success" type="submit">Add</button>
 
       </form>
       <div v-if="selected.length">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>Id</th>
-          <th>Skill</th>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Skill</th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="(skill, index) in selected" v-bind:key="index">
-          <td>{{ index + 1 }}</td>
-          <td>{{ skill.skills.name}}</td>
-          <td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="(skill, index) in selected" v-bind:key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ skill.skills.name }}</td>
+            <td>
               <i class="fa fa-minus-circle a" aria-hidden="true" v-on:click="deleteSkill(skill.id)"></i>
-          </td>
+            </td>
 
-        </tr>
-        </tbody>
-      </table>
+          </tr>
+          </tbody>
+        </table>
         <router-link :to="{name:'membershipInfo'}" class="btn btn-success">Next
         </router-link>
-    </div>
+      </div>
     </div>
 
   </div>
 </template>
 
 <script>
-
 import SkillService from "@/services/SkillService";
 
-
 export default {
-  name: "addSkill",
+  name: 'addSkills',
   data() {
     return {
-      name: {
-        skills: {},
-        ippis: ""
-      },
+      skills: '',
+      ippis: '',
+      message: "",
       selected: [],
       skillList: []
     }
@@ -68,12 +67,19 @@ export default {
   methods: {
     addSkill() {
       let data = {
-        skills: this.name.skills.id,
+        skills: this.skills,
         ippis: this.$store.state.ippis
       };
-      SkillService.createSkills(data).then(() => {
-        this.getSelectedSkills();
+      SkillService.createSkills(data).then((res) => {
+        this.message = res.data.message;
+        return SkillService.retrieveSkillByIppis(this.$store.state.ippis);
       })
+          .then(files => {
+            this.selected = files.data;
+          })
+          .catch(() => {
+            this.message = "failed to add a skill";
+          });
     },
     getListOfSkills() {
       SkillService.getAllSkills().then(res => {
@@ -85,9 +91,9 @@ export default {
         this.selected = res.data;
       })
     },
-    deleteSkill(id){
+    deleteSkill(id) {
       SkillService.deleteSkillById(id).then(() => {
-         this.selected = this.selected.filter(skill => skill.id !== id)
+        this.selected = this.selected.filter(skill => skill.id !== id)
       })
     }
   }
@@ -101,15 +107,15 @@ export default {
   padding-left: 55px;
   padding-right: 30px;
 }
-table{
+
+table {
   width: 350px;
   flex: 2px;
 }
-i{
+
+i {
   float: right;
   cursor: pointer;
 }
-vue-multiselect{
-  background-color: dimgray;
-}
+
 </style>

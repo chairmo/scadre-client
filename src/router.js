@@ -45,6 +45,7 @@ import AddDocument from "@/components/document/AddDocument";
 import Login from "@/components/Login";
 
 import sampleConfig from './services/config';
+import SummaryReport from "@/components/queries/SummaryReport";
 
 Vue.use(Auth, sampleConfig.oidc);
 
@@ -59,11 +60,17 @@ const router = new VueRouter({
             path: '/login',
             component: Login
         },
+        // {
+        //     name: 'homePage',
+        //     path: '/',
+        //     component: HomePage,
+        //     meta: { requiresAuth: true }
+        // },
         {
             name: 'home',
-            path: '/',
+            path: '/home',
             component: Home,
-            // meta: { requiresAuth: true }
+            meta: { requiresAuth: true }
         },
         /*############## BIO-DATA ROUTES ###############*/
         {
@@ -261,6 +268,12 @@ const router = new VueRouter({
             path: '/document',
             component: AddDocument,
             meta: { requiresAuth: true }
+        },
+        {
+            name: 'summaryReport',
+            path: '/report',
+            component: SummaryReport,
+            // meta: { requiresAuth: true }
         },
         {
             path: '/callback',

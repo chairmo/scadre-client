@@ -65,9 +65,23 @@ export default {
           });
     },
     deletePromotion(id) {
+      this.$dialog.confirm("If you delete this record, it'll be gone forever.", {
+        loader: true
+      })
+          .then((dialog) => {
       PromotionService.deletePromotionById(id).then(() => {
         this.promotions = this.promotions.filter(item => item.id !== id);
       });
+            setTimeout(() => {
+              console.log('Delete action completed ');
+              dialog.close();
+            }, 2500);
+          })
+          .catch(() => {
+            // Triggered when cancel button is clicked
+
+            console.log('Delete aborted');
+          });
     }
   },
   created() {

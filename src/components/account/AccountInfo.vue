@@ -49,12 +49,24 @@ export default {
       });
     },
     deleteAccount(id) {
-      if (confirm("Are you sure you want to delete Account details ?")) {
+      this.$dialog.confirm("If you delete this record, it'll be gone forever.", {
+        loader: true
+      })
+          .then((dialog) => {
         AccountService.deleteAccountById(id).then(() => {
           this.account = {}
         }).catch(err => {console.log(err)});
+            setTimeout(() => {
+              console.log('Delete action completed ');
+              dialog.close();
+            }, 2500);
+          })
+          .catch(() => {
+            // Triggered when cancel button is clicked
+
+            console.log('Delete aborted');
+          });
       }
-    },
   },
   created() {
     this.refreshAccount();
