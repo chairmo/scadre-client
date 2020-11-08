@@ -4,16 +4,23 @@
             <div v-if="message" class="alert alert-success">{{ message }}</div>
       <div v-if="employment.id">
         <br>
-        <div class="title"><h6 class="align">Employment Record</h6></div>
+        <div class="title row"><h6 class="align">Employment Record</h6></div>
         <hr class="perpendicular-line"/>
-        <div class="title row"><h6 class="title">MDA </h6><a class="i">{{ employment.mda.name }}</a></div>
-        <div class="title row"><h6 class="title">Department </h6><a class="i">{{ employment.department.name }}</a></div>
-        <div class="title row"><h6 class="title">File Number </h6><a class="i">{{ staffId() }}</a></div>
-        <div class="title row"><h6 class="title">First Appointment </h6><a class="i">{{ employment.dAppoint }}</a></div>
-        <div class="title row"><h6 class="title">Assumption of Duty </h6><a class="i">{{ employment.dAssumption }}</a>
+        <div class="title row"><h6 class="title">MDA </h6><a class="i">
+          {{ employment.mda.name }}</a></div>
+        <div class="title row"><h6 class="title">Department </h6><a class="i">
+          {{ employment.department.name }}</a></div>
+        <div class="title row"><h6 class="title">File Number </h6><a class="i">
+          {{ staffId() }}</a></div>
+        <div class="title row"><h6 class="title">First Appointment </h6><a class="i">
+          {{ employment.dAppoint | moment("DD/MM/YYYY")  }}</a></div>
+        <div class="title row"><h6 class="title">Assumption of Duty </h6><a class="i">
+          {{ employment.dAssumption | moment("DD/MM/YYYY")  }}</a>
         </div>
-        <div class="title row"><h6 class="title">Confirmation Date </h6><a class="i">{{ employment.dConfirm }}</a></div>
-        <div class="title row"><h6 class="title">Appointment Type</h6><a class="i">{{ employment.appointType }}</a>
+        <div class="title row"><h6 class="title">Confirmation Date </h6><a class="i">
+          {{ employment.dConfirm | moment("DD/MM/YYYY")  }}</a></div>
+        <div class="title row"><h6 class="title">Appointment Type</h6><a class="i">
+          {{ employment.appointType }}</a>
         </div>
 
         <hr class="perpendicular-line"/>
@@ -132,8 +139,7 @@ button:hover, a:hover {
 }
 
 .align {
-  margin-right: 150px;
-  padding-left: 200px;
+  margin: auto;
 }
 
 .perpendicular-line {
@@ -141,6 +147,27 @@ button:hover, a:hover {
   margin: 5% auto 0;
   transform: rotate(180deg);
   border-color: black;
+}
+
+.btn-success{
+  background:#007d53;
+}
+
+/* On screens that are less than 700px wide, make the view area flexible */
+@media screen and (max-width: 700px) {
+  .main {
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+/* On screens that are less than 400px wide, make the view area below the sidebar */
+@media screen and (max-width: 400px) {
+  .main {
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 }
 
 </style>

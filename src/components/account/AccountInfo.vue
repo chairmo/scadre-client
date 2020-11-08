@@ -3,7 +3,7 @@
     <div class="card">
       <div v-if="account.id">
         <br>
-        <div class="title"><h6 class="align">Account Information</h6></div>
+        <div class="title row"><h6 class="align">Account Information</h6></div>
         <hr class="perpendicular-line"/>
         <div class="title row"><h6 class="title">Pension Admin </h6><a class="i">{{ account.pension.name }}</a></div>
         <div class="title row"><h6 class="title">Pencom Number </h6><a class="i">{{ pensionNum() }}</a></div>
@@ -13,10 +13,10 @@
         </div>
 
       </div>
-      <a v-if="!account.id" style="text-align: center">
+      <a v-if="!account.id" style="text-align: center;">
         <router-link :to="{name:'addAccount'}" class="btn btn-success">Add Account Info</router-link>
       </a>
-      <div class="btn btn-group" v-if="account.id">
+      <div class="btn btn-group " v-if="account.id">
         <router-link :to="{name:'editAccount', params:{id:account.id}}" class="btn btn-success">Update
         </router-link>
         <router-link :to="{name:'educationInfo'}" class="btn btn-success">Next
@@ -101,7 +101,7 @@ export default {
 a {
   text-decoration: none;
   font-size: 16px;
-  color: black;
+  color: blackgit;
 }
 
 button:hover, a:hover {
@@ -109,8 +109,7 @@ button:hover, a:hover {
 }
 
 .align {
-  margin-right: 150px;
-  padding-left: 200px;
+  margin: auto;
 }
 
 .perpendicular-line {
@@ -118,5 +117,25 @@ button:hover, a:hover {
   margin: 5% auto 0;
   transform: rotate(180deg);
   border-color: black;
+}
+
+.btn-success{
+  background:#007d53;
+}
+/* On screens that are less than 700px wide, make the view area flexible */
+@media screen and (max-width: 700px) {
+  .main {
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+/* On screens that are less than 400px wide, make the view area below the sidebar */
+@media screen and (max-width: 400px) {
+  .main {
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 }
 </style>

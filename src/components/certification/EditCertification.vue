@@ -49,8 +49,11 @@
               </validation-provider>
             </div>
           </div>
+          <div>
+            <button class="btn btn-success" type="submit">Update</button>
+            <router-link :to="{name:'certificationInfo'}" class="i btn btn-success">Cancel</router-link>
+          </div>
 
-          <button class="btn btn-success" type="submit">Update</button>
         </form>
       </validation-observer>
     </div>
@@ -102,4 +105,30 @@ export default {
   padding-right: 30px;
 }
 
+.i {
+  float: right;
+  margin: auto;
+}
+
+.btn-success {
+  background: #007d53;
+}
+
+/* On screens that are less than 700px wide, make the view area flexible */
+@media screen and (max-width: 700px) {
+  .main {
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+
+/* On screens that are less than 400px wide, make the view area below the sidebar */
+@media screen and (max-width: 400px) {
+  .main {
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
 </style>

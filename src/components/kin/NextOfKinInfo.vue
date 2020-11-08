@@ -4,7 +4,7 @@
       <!--      <div v-if="message" class="alert alert-success">{{ message }}</div>-->
       <div v-if="kin.id">
         <br>
-        <div class="title"><h6 class="align">Next of Kin</h6></div>
+        <div class="title row"><h6 class="align">Next of Kin</h6></div>
         <hr class="perpendicular-line"/>
         <div class="title row" ><h6 class="title">Title </h6><a class="i">{{ kin.title }}</a> </div>
         <div class="title row" ><h6 class="title">Full Name </h6><a class="i">{{ fullName('') }}</a> </div>
@@ -116,8 +116,7 @@ button:hover, a:hover {
 }
 
 .align {
-  margin-right: 180px;
-  padding-left: 230px;
+  margin: auto;
 }
 
 .perpendicular-line {
@@ -126,4 +125,26 @@ button:hover, a:hover {
   transform: rotate(180deg);
   border-color: black;
 }
+
+.btn-success{
+  background:#007d53;
+}
+
+/* On screens that are less than 700px wide, make the view area flexible */
+@media screen and (max-width: 700px) {
+  .main {
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+/* On screens that are less than 400px wide, make the view area below the sidebar */
+@media screen and (max-width: 400px) {
+  .main {
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+
 </style>

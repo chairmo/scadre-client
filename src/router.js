@@ -284,7 +284,7 @@ const router = new VueRouter({
 
 const onAuthRequired = async (from, to, next) => {
     if (from.matched.some(record => record.meta.requiresAuth) && !(await Vue.prototype.$auth.isAuthenticated())){
-        next({path: '/login'})
+        next({path: '/'})
     } else {
         next()
     }

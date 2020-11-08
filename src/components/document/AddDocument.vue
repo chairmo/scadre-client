@@ -1,8 +1,9 @@
 <template>
   <div class="main">
+    <div class="card">
     <h5 class="align-content-center">Note: Name your required documents accordingly</h5>
     <div>
-      <h6>*Passport</h6>
+      <h6>Passport</h6>
       <h6>First Appointment Letter</h6>
       <h6>First Degree</h6>
       <h6>Promotion Letter</h6>
@@ -31,8 +32,8 @@
 
     <div class="alert alert-light" role="alert">{{ message }}</div>
 
-    <div v-if="fileInfos.length" class="card">
-      <table>
+    <div v-if="fileInfos.length" class="card a">
+      <table class="table table-responsive">
         <thead>
 
         <tr v-for="(file, index) in fileInfos" v-bind:key="index">
@@ -50,7 +51,7 @@
         <span v-if="submit"><router-link :to="{name:'summaryReport'}" class="btn btn-success">Submit
         </router-link></span>
       </div>
-
+    </div>
   </div>
 </template>
 
@@ -116,22 +117,50 @@ export default {
 }
 
 .card {
-  width: 450px;
-  flex: 2px;
+  max-width: 750px;
+  /*flex: 2px;*/
+  margin: auto;
+}
+.card a {
+  max-width: 450px;
+  /*flex: 2px;*/
+  margin: auto;
 }
 
 i {
   float: right;
   cursor: pointer;
+  margin: auto;
 }
 
 h6 {
   font-size: medium;
   font-family: sans-serif, Arial;
-  margin-right: 10px;
+  margin: 15px;
 }
 .space{
   margin: 80px;
   align-content: center;
+}
+
+.btn-success{
+  background:#007d53;
+}
+
+/* On screens that are less than 700px wide, make the view area flexible */
+@media screen and (max-width: 700px) {
+  .main {
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+/* On screens that are less than 400px wide, make the view area below the sidebar */
+@media screen and (max-width: 400px) {
+  .main {
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 }
 </style>

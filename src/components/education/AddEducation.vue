@@ -80,7 +80,10 @@
             </div>
           </div>
 
-          <button class="btn btn-success" type="submit" >Save</button>
+          <div>
+            <button class="btn btn-success" type="submit">Save</button>
+            <router-link :to="{name:'educationInfo'}" class="i btn btn-success">Cancel</router-link>
+          </div>
         </form>
       </validation-observer>
     </div>
@@ -165,11 +168,38 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style  scoped>
+
 .main {
   margin-left: 160px; /* Same as the width of the sidebar */
   padding-left: 55px;
   padding-right: 30px;
 }
 
+.i{
+  float: right;
+  margin: auto;
+}
+
+.btn-success{
+  background:#007d53;
+}
+
+/* On screens that are less than 700px wide, make the view area flexible */
+@media screen and (max-width: 700px) {
+  .main {
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+
+/* On screens that are less than 400px wide, make the view area below the sidebar */
+@media screen and (max-width: 400px) {
+  .main {
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
 </style>

@@ -3,7 +3,7 @@
     <h5> Service History</h5>
     <div v-if="message" class="alert-success"/>
     <div class="align-content-center">
-      <table class="table">
+      <table class="table table-responsive">
         <thead>
         <tr>
           <th>Id</th>
@@ -23,8 +23,8 @@
           <td>{{ history.department.name }}</td>
           <td>{{ history.designation.name }}</td>
           <td>{{ history.location.name }}</td>
-          <td>{{ history.dAssumption }}</td>
-          <td>{{ history.exitDate }}</td>
+          <td>{{ history.dAssumption | moment("DD/MM/YYYY") }}</td>
+          <td>{{ history.exitDate | moment("DD/MM/YYYY")  }}</td>
           <td>
             <div class="btn btn-group">
               <router-link :to="{name:'editHistory', params:{id:history.id}}" class="btn btn-success">Update
@@ -98,6 +98,29 @@ export default {
 }
 
 .i {
-  margin-left: 150px;
+  float: right;
+  margin: auto;
 }
+
+.btn-success{
+  background:#007d53;
+}
+
+/* On screens that are less than 700px wide, make the view area flexible */
+@media screen and (max-width: 700px) {
+  .main {
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+/* On screens that are less than 400px wide, make the view area below the sidebar */
+@media screen and (max-width: 400px) {
+  .main {
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+
 </style>

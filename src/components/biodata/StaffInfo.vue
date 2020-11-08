@@ -17,7 +17,7 @@
         <div class="title row"><h6 class="title">Phone </h6><a class="i">{{ staff.phoneNumber }}</a></div>
         <div class="title row"><h6 class="title">Email </h6><a class="i">{{ staff.email }}</a></div>
         <div class="title row"><h6 class="title">NIN </h6><a class="i">{{ staff.nin }}</a></div>
-        <div class="title row"><h6 class="title">DOB </h6><a class="i">{{ staff.dob }}</a></div>
+        <div class="title row"><h6 class="title">DOB </h6><a class="i">{{ staff.dob | moment("DD/MM/YYYY") }}</a></div>
         <div class="title row"><h6 class="title">Age </h6><a class="i">{{ staff.age }}</a></div>
         <div class="title row"><h6 class="title">Place of Origin</h6><a class="i">{{ placeOfOrigin('') }}</a></div>
         <div class="title row"><h6 class="title">Address </h6><a class="i">{{ staff.address }}</a></div>
@@ -66,6 +66,7 @@ export default {
           this.loading = false;
 
           this.staff = res.data;
+          console.log("Staff info: ", this.staff)
         })
       },
 
@@ -136,10 +137,9 @@ export default {
   width: 350px;
 }
 
-i{
-color: #007d53;
- margin: auto;
-}
+/*i{*/
+/* margin: auto;*/
+/*}*/
 a {
   text-decoration: none;
   font-size: 16px;
@@ -162,4 +162,26 @@ p {
   height: 100px;
   margin: auto;
 }
+
+.btn-success{
+  background:#007d53;
+}
+
+/* On screens that are less than 700px wide, make the view area flexible */
+@media screen and (max-width: 700px) {
+  .main {
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+/* On screens that are less than 400px wide, make the view area below the sidebar */
+@media screen and (max-width: 400px) {
+  .main {
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+
 </style>

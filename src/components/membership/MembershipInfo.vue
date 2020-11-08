@@ -3,7 +3,7 @@
     <h5> Professional Membership</h5>
     <div v-if="message" class="alert-success"/>
     <div class="align-content-center">
-      <table class="table">
+      <table class="table table-responsive">
         <thead>
         <tr>
           <th>Id</th>
@@ -22,7 +22,7 @@
           <td>{{ membership.name.toUpperCase() }}</td>
           <td>{{ membership.regNum.toUpperCase() }}</td>
           <td>{{ membership.type.name }}</td>
-          <td>{{ membership.dateOfInduction }}</td>
+          <td>{{ membership.dateOfInduction | moment("DD/MM/YYYY") }}</td>
           <td>
             <div class="btn btn-group">
               <router-link :to="{name:'editMembership', params:{id:membership.id}}" class="btn btn-success">Update
@@ -35,7 +35,7 @@
         </tbody>
       </table>
       <div>
-        <router-link :to="{name:'addMembership'}" class="btn btn-success ">Add Membership</router-link>
+        <router-link :to="{name:'addMembership'}" class="btn btn-success ">Add </router-link>
         <router-link :to="{name:'nextOfKinInfo'}"
                      class="i btn btn-success" v-if="memberships.length">Next
         </router-link>
@@ -95,6 +95,28 @@ export default {
 }
 
 .i {
-  margin-left: 150px;
+  float: right;
+  margin: auto;
 }
+
+.btn-success{
+  background:#007d53;
+}
+/* On screens that are less than 700px wide, make the view area flexible */
+@media screen and (max-width: 700px) {
+  .main {
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+/* On screens that are less than 400px wide, make the view area below the sidebar */
+@media screen and (max-width: 400px) {
+  .main {
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+
 </style>

@@ -2,7 +2,7 @@
   <div class="main">
     <h5>Educational Record</h5>
     <div class="align-content-center">
-      <table class="table">
+      <table class="table table-responsive">
         <thead>
         <tr>
           <th>Id</th>
@@ -22,8 +22,8 @@
           <td>{{ education.course.name }}</td>
           <td>{{ education.school.toUpperCase() }}</td>
           <td>{{ education.grade }}</td>
-          <td>{{ education.startDate }}</td>
-          <td>{{ education.finishDate }}</td>
+          <td>{{ education.startDate | moment("DD/MM/YYYY")  }}</td>
+          <td>{{ education.finishDate | moment("DD/MM/YYYY") }}</td>
           <td>
             <div class="btn btn-group">
               <router-link :to="{name:'editEducation', params:{id:education.id}}" class="btn btn-success">Update
@@ -96,6 +96,28 @@ export default {
 }
 
 .i {
-  margin-left: 150px;
+  float: right;
+  margin: auto;
+}
+
+.btn-success{
+  background:#007d53;
+}
+
+/* On screens that are less than 700px wide, make the view area flexible */
+@media screen and (max-width: 700px) {
+  .main {
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+/* On screens that are less than 400px wide, make the view area below the sidebar */
+@media screen and (max-width: 400px) {
+  .main {
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 }
 </style>

@@ -10,7 +10,8 @@ import store from "@/store";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import VuejsDialog from 'vuejs-dialog';
-import 'vuejs-dialog/dist/vuejs-dialog.min.css'
+import 'vuejs-dialog/dist/vuejs-dialog.min.css';
+import moment from 'vue-moment';
 
 import {
   faHome,
@@ -46,9 +47,9 @@ Vue.component('ValidationProvider', ValidationProvider);
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
 Vue.use(VuejsDialog);
+Vue.use(moment);
 
 Vue.config.productionTip = false
-
 
 
 new Vue({

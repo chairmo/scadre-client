@@ -4,7 +4,7 @@
 
       <div v-if="staff.id">
         <button v-print="'#printMe'">print</button>
-        <p> {{ currentDateTime() }}</p>
+        <p> {{ currentDateTime() | moment("dddd, MMMM Do YYYY, h:mm:ss a")  }}</p>
 
         <br>
         <div v-if="photo">
@@ -12,13 +12,14 @@
                  alt="circle image"></b-img>
         </div>
         <hr class="perpendicular-line"/>
-        <div class="title"><h6 class="align">Personal Data</h6></div>
+        <div class="title row"><h6 class="align">Personal Data</h6></div>
+        <br/>
         <div class="title row"><h6 class="title">Title </h6><a class="i">{{ staff.title }}</a></div>
         <div class="title row"><h6 class="title">Full Name </h6><a class="i">{{ fullName('') }}</a></div>
         <div class="title row"><h6 class="title">Phone </h6><a class="i">{{ staff.phoneNumber }}</a></div>
         <div class="title row"><h6 class="title">Email </h6><a class="i">{{ staff.email }}</a></div>
         <div class="title row"><h6 class="title">NIN </h6><a class="i">{{ staff.nin }}</a></div>
-        <div class="title row"><h6 class="title">DOB </h6><a class="i">{{ staff.dob }}</a></div>
+        <div class="title row"><h6 class="title">DOB </h6><a class="i">{{ staff.dob | moment("DD/MM/YYYY") }}</a></div>
         <div class="title row"><h6 class="title">Age </h6><a class="i">{{ staff.age }}</a></div>
         <div class="title row"><h6 class="title">Place of Origin</h6><a class="i">{{ placeOfOrigin('') }}</a></div>
         <div class="title row"><h6 class="title">Address </h6><a class="i">{{ staff.address }}</a></div>
@@ -28,18 +29,21 @@
       <hr class="perpendicular-line"/>
 
       <div v-if="employment.id">
-        <br>
-        <div class="title"><h6 class="align">Employment Record</h6></div>
-        <!--          <hr class="perpendicular-line"/>-->
+        <div class="title row"><h6 class="align">Employment Record</h6></div>
+        <br/>
+<!--                  <hr class="perpendicular-line"/>-->
         <div class="title row"><h6 class="title">MDA </h6><a class="i">{{ employment.mda.name }}</a></div>
         <div class="title row"><h6 class="title">Department </h6><a class="i">{{ employment.department.name }}</a>
         </div>
         <div class="title row"><h6 class="title">File Number </h6><a class="i">{{ staffId() }}</a></div>
-        <div class="title row"><h6 class="title">First Appointment </h6><a class="i">{{ employment.dAppoint }}</a>
+        <div class="title row"><h6 class="title">First Appointment </h6>
+          <a class="i">{{ employment.dAppoint | moment("DD/MM/YYYY") }}</a>
         </div>
-        <div class="title row"><h6 class="title">Assumption of Duty </h6><a class="i">{{ employment.dAssumption }}</a>
+        <div class="title row"><h6 class="title">Assumption of Duty </h6>
+          <a class="i">{{ employment.dAssumption | moment("DD/MM/YYYY") }}</a>
         </div>
-        <div class="title row"><h6 class="title">Confirmation Date </h6><a class="i">{{ employment.dConfirm }}</a>
+        <div class="title row"><h6 class="title">Confirmation Date </h6>
+          <a class="i">{{ employment.dConfirm | moment("DD/MM/YYYY") }}</a>
         </div>
         <div class="title row"><h6 class="title">Appointment Type</h6><a class="i">{{ employment.appointType }}</a>
         </div>
@@ -55,9 +59,9 @@
       </div>
       <hr class="perpendicular-line"/>
       <div v-if="kin.id">
-        <br>
-        <div class="title"><h6 class="align">Next of Kin</h6></div>
-        <!--          <hr class="perpendicular-line"/>-->
+        <div class="title row"><h6 class="align">Next of Kin</h6></div>
+        <br/>
+<!--                  <hr class="perpendicular-line"/>-->
         <div class="title row"><h6 class="title">Title </h6><a class="i">{{ kin.title }}</a></div>
         <div class="title row"><h6 class="title">Full Name </h6><a class="i">{{ kinFullName('') }}</a></div>
         <div class="title row"><h6 class="title">Relationship </h6><a class="i">{{ kin.relationship }}</a></div>
@@ -70,8 +74,8 @@
       <hr class="perpendicular-line"/>
       <div class="align-content-center" v-if="educations.length">
         <br>
-        <div class="title"><h6 class="align">Educational qualification</h6></div>
-        <table class="table">
+        <div class="title row"><h6 class="align">Educational qualification</h6></div>
+        <table class="table table-responsive">
           <thead>
           <tr>
             <th>Id</th>
@@ -91,8 +95,8 @@
             <td>{{ education.course.name }}</td>
             <td>{{ education.school.toUpperCase() }}</td>
             <td>{{ education.grade }}</td>
-            <td>{{ education.startDate }}</td>
-            <td>{{ education.finishDate }}</td>
+            <td>{{ education.startDate | moment("DD/MM/YYYY") }}</td>
+            <td>{{ education.finishDate | moment("DD/MM/YYYY") }}</td>
           </tr>
           </tbody>
         </table>
@@ -100,8 +104,8 @@
       <hr class="perpendicular-line"/>
       <div class="align-content-center" v-if="histories.length">
         <br>
-        <div class="title"><h6 class="align">Work History</h6></div>
-        <table class="table">
+        <div class="title row"><h6 class="align">Service History</h6></div>
+        <table class="table table-responsive">
           <thead>
           <tr>
             <th>Id</th>
@@ -120,8 +124,8 @@
             <td>{{ history.department.name }}</td>
             <td>{{ history.designation.name }}</td>
             <td>{{ history.location.name }}</td>
-            <td>{{ history.dAssumption }}</td>
-            <td>{{ history.exitDate }}</td>
+            <td>{{ history.dAssumption | moment("DD/MM/YYYY") }}</td>
+            <td>{{ history.exitDate | moment("DD/MM/YYYY") }}</td>
           </tr>
           </tbody>
         </table>
@@ -281,8 +285,7 @@ a {
 }
 
 .align {
-  margin-right: 250px;
-  padding-left: 300px;
+  margin: auto;
 }
 
 button {
@@ -297,4 +300,22 @@ p {
   margin: 5px;
   font-family: Garamond;
 }
+
+/* On screens that are less than 700px wide, make the view area flexible */
+@media screen and (max-width: 700px) {
+  .main {
+    margin: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
+/* On screens that are less than 400px wide, make the view area below the sidebar */
+@media screen and (max-width: 400px) {
+  .main {
+    margin: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}
+
 </style>
