@@ -86,7 +86,13 @@ export default {
           },
           error => {
             this.loading = false;
-            this.message = error.response.data.exMessage
+            if(error.response.status === 400) {
+              this.message = "Email or Password Incorrect"
+            } else{
+               this.message = error.response.data.message
+            }
+            // this.message = error.response.data.message
+            console.log("ERROR: ", error.response.status)
           }
       );
     }
