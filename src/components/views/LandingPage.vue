@@ -35,7 +35,7 @@
                   </li>
                   <li style="margin-right: 20px">
                     <a href="#" data-offset="90">
-                      <router-link to="/register" class="nav-item nav-link">Register</router-link>
+                      <router-link to="/register" class="nav-item nav-link" tag="button" :disabled=true>Register</router-link>
                     </a>
                   </li>
                   <li style="margin-right: 20px">
