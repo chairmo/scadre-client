@@ -171,7 +171,7 @@
             <div class="row">
               <div class="col-lg-4 text-center text-lg-left">
                 <img src="../../assets/promotions.jpg"
-                     alt="50%" height="269" width="400">
+                     alt="50%" height="200" width="400">
               </div>
 
               <div class="col-lg-7">
