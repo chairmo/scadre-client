@@ -170,8 +170,8 @@
             </div>
             <div class="row">
               <div class="col-lg-4 text-center text-lg-left">
-                <img src="../../assets/promotions.jpg"
-                     alt="sample image" height="269" width="400">
+                <img class="img-fluid" src="../../assets/promotions.jpg"
+                     alt="sample image" height="200" width="400">
               </div>
 
               <div class="col-lg-7">
